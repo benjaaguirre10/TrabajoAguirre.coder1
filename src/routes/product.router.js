@@ -13,6 +13,8 @@ router.get('/:id',checkAuth, controller.getProdById);
 
 router.post('/', [checkAuth, checkAdmin],controller.create);
 
+router.post("/mockingproducts", controller.createMock);
+
 router.put('/:id', [checkAuth, checkAdmin],controller.update);
 
 router.delete('/:id', [checkAuth, checkAdmin],controller.delete);

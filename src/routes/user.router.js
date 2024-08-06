@@ -11,4 +11,5 @@ router.post("/login", controllers.login)
 
 router.get("/profile", checkAuth, controllers.profile)
 
+
 export default router;

@@ -6,6 +6,13 @@ export default class productsDaoMongoDB extends MongoDao {
     constructor(){
         super(productModel);
     }
+    async createMock(obj){
+        try {
+            return this.model.create(obj)
+        } catch (error) {
+            
+        }
+    }
 }
 
 

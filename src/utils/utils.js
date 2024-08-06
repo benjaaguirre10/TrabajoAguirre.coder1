@@ -24,7 +24,3 @@ export const createHash = password => bcryptjs.hashSync(password, bcryptjs.genSa
 export const isValidPassword = (password, user) => bcryptjs.compareSync(password, user.password);
 
 /* ------------------------------------ - ----------------------------------- */
-
-export const createResponse = (res, statusCode, data) => {
-        return res.status(statusCode).json({data})
-}

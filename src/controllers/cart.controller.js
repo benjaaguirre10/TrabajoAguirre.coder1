@@ -1,7 +1,9 @@
 import CartService from "../service/cart.service.js";
 import Controllers from "./class.controller.js";
-
+import { HttpResponse } from "../utils/http.response.js";
+const httpResponse = new HttpResponse()
 const cartService = new CartService()
+
 
 export default class CartController extends Controllers{
     constructor(){
@@ -14,8 +16,9 @@ addProductToCart = async (req, res, next) => {
         const cid = req.params.cid;
         const { quantity } = req.body
         console.log(pid, cid, quantity);
-        const producto = await this.service.addProductToCart(cid, pid, quantity)
-        res.send(producto)
+        const data = await this.service.addProductToCart(cid, pid, quantity)
+        if(!data) return httpResponse.notFound(res, data)
+            else return httpResponse.Ok(res, data)
     } catch (error) {
         next(error)
     }
@@ -25,8 +28,9 @@ updateQuantity = async (req, res, next) => {
         const cid = req.params.cid;
         const pid = req.params.pid;
         const { quantity } = req.body;
-        const cart = await this.service.updateProdQuantity(cid, pid, quantity);
-        res.send(cart)
+        const data = await this.service.updateProdQuantity(cid, pid, quantity);
+        if(!data) return httpResponse.notFound(res, data)
+            else return httpResponse.Ok(res, data)
     } catch (error) {
         next(error)
     }
@@ -34,8 +38,9 @@ updateQuantity = async (req, res, next) => {
 deleteCarts = async (req, res, next) => {
     try {
         const cid = req.params.cid;
-        const deleteCart = await this.service.deleteCartById(cid)
-        res.status(200).json({ msg: "Cart delete succesfully" });
+        const data = await this.service.deleteCartById(cid)
+        if(!data) return httpResponse.notFound(res, data)
+            else return httpResponse.Ok(res, data)
     } catch (error) {
         next(error)
     }
@@ -45,8 +50,9 @@ deleteProductFromCart = async (req, res, next) => {
     try {
         const cid = req.params.cid;
         const pid = req.params.pid;
-        const cart = await this.service.deleteProdFromCart(cid, pid)
-        res.send(cart)
+        const data = await this.service.deleteProdFromCart(cid, pid)
+        if(!data) return httpResponse.notFound(res, data)
+            else return httpResponse.Ok(res, data)
     } catch (error) {
         next(error)
     }
@@ -55,8 +61,9 @@ deleteProductFromCart = async (req, res, next) => {
 deleteAllProducts = async (req, res, next) => {
     try {
         const cid = req.params.cid;
-        const cart = await this.service.deleteAllProdCart(cid)
-        res.send(cart)
+        const data = await this.service.deleteAllProdCart(cid)
+        if(!data) return httpResponse.notFound(res, data)
+            else return httpResponse.Ok(res, data)
     } catch (error) {
         next(error)
     }
