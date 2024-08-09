@@ -2,7 +2,7 @@ import UserDaoMongo from "../persistence/dao/mongodb/user.dao.js"
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 import config from "../config.js";
-import { createHash, isValidPassword} from "../utils.js";
+import { createHash, isValidPassword} from "../utils/utils.js";
 import Services from "./class.service.js";
 
 const userDao = new UserDaoMongo()

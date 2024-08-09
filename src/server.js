@@ -5,6 +5,7 @@ import { initMongoDb, storeConfig } from './db/conexion.js';
 import config from './config.js';
 import MainRouter from "./routes/index.js";
 import { errorHandler } from './middlewares/errorHandler.js';
+import logger from "./utils/logger.js";
 
 const app = express();
 const mainRouter = new MainRouter();
@@ -30,8 +31,17 @@ app.use(errorHandler);
 const PORT = config.PORT;
 const MODE = config.NODE_ENV;
 
-// Iniciar el servidor
+
 const httpServer = app.listen(PORT, () => {
-    console.log(`Escuchando puerto ${PORT}`);
-    console.log(`mode: ${MODE}`);
+    logger.info(`Servidor iniciado en puerto ${PORT}`);
+    logger.info(`Modo: ${MODE}`);
+});
+
+
+httpServer.on('error', (err) => {
+    logger.error('Error en el servidor:', err);
+});
+
+httpServer.on('close', () => {
+    logger.info('Servidor cerrado');
 });

@@ -1,4 +1,4 @@
-import { HttpResponse } from "../utils/http.response";
+import { HttpResponse } from "../utils/http.response.js";
 const httpResponse = new HttpResponse()
 
 export default class Controllers {
